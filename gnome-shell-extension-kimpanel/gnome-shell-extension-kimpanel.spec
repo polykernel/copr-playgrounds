@@ -17,21 +17,26 @@ BuildRequires:  %{_bindir}/glib-compile-schemas
 Requires:       gnome-shell-extension-common
 
 %description
-This extension implements the KDE kimpanel protocol for gnome shell. It provides a native
-pop-up window for input method listings and an appindicator based tray icon for configurations.
+This extension implements the KDE kimpanel protocol for gnome shell. It
+provides a native pop-up window for input method listings and an app-
+indicator based tray icon for configurations.
+
 
 %prep
 %autosetup
+
 
 %build
 %cmake
 %cmake_build
 glib-compile-schemas --strict --targetdir=schemas/ schemas
 
+
 %install
 mkdir -p %{buildroot}%{gschemadir}
 %cmake_install
 cp -pr schemas/org.gnome.shell.extensions.kimpanel.gschema.xml %{buildroot}%{gschemadir}
+
 
 # Fedora and EPEL 8 handles post scripts via triggers
 %if 0%{?rhel} && 0%{?rhel} <= 7
@@ -44,11 +49,13 @@ fi
 %{_bindir}/glib-compile-schemas %{gschemadir} &> /dev/null || true
 %endif
 
+
 %files
 %license COPYING
 %{_datadir}/gnome-shell/extensions/%{extdir}
 %{_datadir}/locale/*/LC_MESSAGES/gnome-shell-extensions-kimpanel.mo
 %{gschemadir}
+
 
 %changelog
 %autochangelog

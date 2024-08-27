@@ -17,13 +17,17 @@ Requires:       gnome-shell-extension-common
 
 %description
 PaperWM is a Gnome Shell extension which provides scroll-able tiling of windows
-and per monitor workspaces. It's inspired by paper notebooks and tiling window managers.
+and per monitor workspaces. It's inspired by paper notebooks and tiling window
+managers.
+
 
 %prep
 %autosetup -n PaperWM-%{version}
 
+
 %build
 glib-compile-schemas --strict --targetdir=schemas/ schemas
+
 
 %install
 mkdir -p %{buildroot}%{_datadir}/gnome-shell/extensions/%{extdir}
@@ -34,6 +38,7 @@ cp -pr --parents metadata.json stylesheet.css *.js \
   schemas/gschemas.compiled schemas/org.gnome.shell.extensions.paperwm.gschema.xml \
   resources/ \
   %{buildroot}%{_datadir}/gnome-shell/extensions/%{extdir}
+
 
 # Fedora and EPEL 8 handles post scripts via triggers
 %if 0%{?rhel} && 0%{?rhel} <= 7
@@ -46,10 +51,12 @@ fi
 %{_bindir}/glib-compile-schemas %{gschemadir} &> /dev/null || true
 %endif
 
+
 %files
 %license LICENSE
 %{_datadir}/gnome-shell/extensions/%{extdir}
 %{gschemadir}
+
 
 %changelog
 %autochangelog
