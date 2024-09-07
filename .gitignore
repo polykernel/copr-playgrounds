@@ -1,0 +1,3 @@
+# RPM build artifacts
+results_*
+*.rpm
