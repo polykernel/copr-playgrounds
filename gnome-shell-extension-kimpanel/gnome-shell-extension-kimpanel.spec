@@ -36,6 +36,7 @@ glib-compile-schemas --strict --targetdir=schemas/ schemas
 mkdir -p %{buildroot}%{gschemadir}
 %cmake_install
 cp -pr schemas/org.gnome.shell.extensions.kimpanel.gschema.xml %{buildroot}%{gschemadir}
+%find_lang gnome-shell-extensions-kimpanel
 
 
 # Fedora and EPEL 8 handles post scripts via triggers
@@ -50,10 +51,12 @@ fi
 %endif
 
 
-%files
+%files -f gnome-shell-extensions-kimpanel.lang
 %license COPYING
-%{_datadir}/gnome-shell/extensions/%{extdir}
-%{_datadir}/locale/*/LC_MESSAGES/gnome-shell-extensions-kimpanel.mo
+%{_datadir}/gnome-shell/extensions/%{extdir}/metadata.json
+%{_datadir}/gnome-shell/extensions/%{extdir}/stylesheet.css
+%{_datadir}/gnome-shell/extensions/%{extdir}/*.js
+%{_datadir}/gnome-shell/extensions/%{extdir}/schemas
 %{gschemadir}
 
 
